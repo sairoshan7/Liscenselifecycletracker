@@ -43,4 +43,8 @@ public interface AdminService {
     
     ResponseEntity<List<Device>> viewDevices() throws DeviceNotFoundException;
     ResponseEntity<Device> searchDevicesById(Long deviceId) throws DeviceNotFoundException;
+
+	ResponseEntity<List<Software>> viewSoftware() throws SoftwareNotFoundException;
+
+	ResponseEntity<Software> searchSoftwareById(Long softwareId) throws SoftwareNotFoundException;
 }

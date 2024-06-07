@@ -164,4 +164,21 @@ public class AdminServiceImpl implements AdminService {
                 .orElseThrow(() -> new DeviceNotFoundException("Device with ID " + deviceId + " not found."));
         return ResponseEntity.ok(device);
     }
+    
+    @Override
+    public ResponseEntity<List<Software>> viewSoftware() throws SoftwareNotFoundException {
+        List<Software> softwareList = (List<Software>) softwareRepository.findAll();
+        if (softwareList.isEmpty()) {
+            throw new SoftwareNotFoundException("No software found.");
+        }
+        return ResponseEntity.ok(softwareList);
+    }
+    
+    
+    @Override
+    public ResponseEntity<Software> searchSoftwareById(Long softwareId) throws SoftwareNotFoundException {
+        Software software = softwareRepository.findById(softwareId)
+                .orElseThrow(() -> new SoftwareNotFoundException("Software with ID " + softwareId + " not found."));
+        return ResponseEntity.ok(software);
+    }
 }

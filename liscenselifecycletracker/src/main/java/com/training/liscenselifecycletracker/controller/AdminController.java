@@ -68,13 +68,13 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/licenses/addsoftwares")
+    @PostMapping("/addsoftware")
     public ResponseEntity<String> addSoftware(@RequestBody Software software) {
         adminService.addSoftware(software);
         return ResponseEntity.status(HttpStatus.CREATED).body("Software added successfully");
     }
 
-    @PutMapping("/licenses/updatesoftwares")
+    @PutMapping("/updatesoftware")
     public ResponseEntity<String> updateSoftware(@RequestBody Software updatedSoftware) {
         try {
             adminService.updateSoftware(updatedSoftware);
@@ -84,7 +84,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/licenses/softwares/deletesoftware")
+    @PostMapping("/deletesoftware")
     public ResponseEntity<String> deleteSoftware(@RequestParam Long softwareId) {
         try {
             adminService.deleteSoftware(softwareId);
@@ -182,6 +182,28 @@ public class AdminController {
             Device devices =  adminService.searchDevicesById(deviceId).getBody();
             return ResponseEntity.ok(devices);
         } catch (DeviceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+    
+    
+    @GetMapping("/getallsoftwares")
+    public ResponseEntity<?> viewSoftware() {
+        try {
+            List<Software> softwareList = (List<Software>) adminService.viewSoftware().getBody();
+            return ResponseEntity.ok(softwareList);
+        } catch (SoftwareNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+    
+    
+    @GetMapping("/getsoftware")
+    public ResponseEntity<?> searchSoftwareById(@RequestParam Long softwareId) {
+        try {
+            Software software = adminService.searchSoftwareById(softwareId).getBody();
+            return ResponseEntity.ok(software);
+        } catch (SoftwareNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.liscenselifecycletracker.entities.ERole;
 import com.training.liscenselifecycletracker.entities.Role;
 import com.training.liscenselifecycletracker.entities.User;
 import com.training.liscenselifecycletracker.security.jwt.JwtUtils;
@@ -93,7 +94,7 @@ public class AuthController {
             user.setUsername(signUpRequest.getUsername());
             user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
             user.setEmail(signUpRequest.getEmail());
-            Optional<Role> role = roleService.findRoleById(1);
+            Optional<Role> role = roleService.findRoleByName(ERole.ROLE_USER);
             if (role.isPresent()) {
                 user.setRole(role.get());
             }
