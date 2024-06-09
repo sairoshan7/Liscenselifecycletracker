@@ -30,4 +30,6 @@ public interface RegularUser {
     ResponseEntity<List<Software>> searchSoftwareByPurchaseDate(LocalDate purchaseDate) throws SoftwareNotFoundException;
     ResponseEntity<List<Software>> searchSoftwareByExpiryDate(LocalDate expiryDate) throws SoftwareNotFoundException;
     ResponseEntity<List<Software>> searchSoftwareBySupportEndDate(LocalDate supportEndDate) throws SoftwareNotFoundException;
+	ResponseEntity<List<Software>> viewSoftwares() throws SoftwareNotFoundException;
+	ResponseEntity<List<Software>> searchSoftwareByStatus(String status) throws SoftwareNotFoundException;
 }

@@ -47,4 +47,8 @@ public interface AdminService {
 	ResponseEntity<List<Software>> viewSoftware() throws SoftwareNotFoundException;
 
 	ResponseEntity<Software> searchSoftwareById(Long softwareId) throws SoftwareNotFoundException;
+
+	ResponseEntity<?> viewAllLifecycleEvents() throws LifecycleEventNotFoundException;
+
+	ResponseEntity<LifecycleEvent> getLifecycleEventById(Long eventId) throws LifecycleEventNotFoundException;
 }

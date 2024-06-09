@@ -23,7 +23,7 @@ public class TestApiController {
 
 	@GetMapping("/mod")
 	public String parentAccess() {
-		return "Moderator Board.";
+		return "Management Board.";
 	}
 
 	@GetMapping("/admin")

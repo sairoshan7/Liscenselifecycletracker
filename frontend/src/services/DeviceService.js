@@ -19,7 +19,7 @@ const addDevice = async (device, token) => {
   }
 };
 
-const updateDevice = async (device, token) => {
+const updateDevice = async (device) => {
   try {
     const response = await axios.put(`${BASE_URL}/admin/updatedevices`, device, {
       headers: { 
@@ -33,11 +33,15 @@ const updateDevice = async (device, token) => {
   }
 };
 
-const deleteDevice = async (deviceId, token) => {
+const deleteDevice = async (deviceId) => {
   try {
-    const response = await axios.post(`${BASE_URL}/admin/devices/deletedevices`, null, {
-      params: { deviceId },
-      headers: { ...authHeader() }
+    const response = await axios.post(`${BASE_URL}/admin/devices/deletedevices`, deviceId, {
+      headers: { 
+        'Content-Type': 'application/json',
+        ...authHeader(), 
+        'Access-Control-Allow-Origin': '*'
+
+       }
     });
     return response.data;
   } catch (err) {
@@ -45,7 +49,7 @@ const deleteDevice = async (deviceId, token) => {
   }
 };
 
-const viewDevices = async (token) => {
+const viewDevices = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/admin/getalldevices`, {
       headers: { ...authHeader() }

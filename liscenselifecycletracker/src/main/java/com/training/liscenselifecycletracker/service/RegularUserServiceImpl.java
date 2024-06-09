@@ -34,6 +34,15 @@ public class RegularUserServiceImpl implements RegularUser {
         }
         return ResponseEntity.ok(devices);
     }
+    
+    @Override
+    public ResponseEntity<List<Software>> viewSoftwares() throws SoftwareNotFoundException {
+        List<Software> softwares = (List<Software>) softwareRepository.findAll();
+        if (softwares.isEmpty()) {
+            throw new SoftwareNotFoundException("No software found.");
+        }
+        return ResponseEntity.ok(softwares);
+    }
 
     @Override
     public ResponseEntity<List<String>> receiveNotifications() {
@@ -171,6 +180,15 @@ public class RegularUserServiceImpl implements RegularUser {
         List<Software> softwareList = softwareRepository.findBySupportEndDate(supportEndDate);
         if (softwareList.isEmpty()) {
             throw new SoftwareNotFoundException("No software found for support end date '" + supportEndDate + "'.");
+        }
+        return ResponseEntity.ok(softwareList);
+    }
+    
+    @Override
+    public ResponseEntity<List<Software>> searchSoftwareByStatus(String status) throws SoftwareNotFoundException {
+        List<Software> softwareList = softwareRepository.findByStatus(status);
+        if (softwareList.isEmpty()) {
+            throw new SoftwareNotFoundException("No software found for status '" + status + "'.");
         }
         return ResponseEntity.ok(softwareList);
     }

@@ -181,4 +181,20 @@ public class AdminServiceImpl implements AdminService {
                 .orElseThrow(() -> new SoftwareNotFoundException("Software with ID " + softwareId + " not found."));
         return ResponseEntity.ok(software);
     }
+    
+    @Override
+    public ResponseEntity<?> viewAllLifecycleEvents() throws LifecycleEventNotFoundException {
+        List<LifecycleEvent> lifecycleEvents = (List<LifecycleEvent>) lifecycleEventRepository.findAll();
+        if (lifecycleEvents.isEmpty()) {
+            throw new LifecycleEventNotFoundException("No lifecycle events found.");
+        }
+        return ResponseEntity.ok(lifecycleEvents);
+    }
+
+    @Override
+    public ResponseEntity<LifecycleEvent> getLifecycleEventById(Long eventId) throws LifecycleEventNotFoundException {
+        LifecycleEvent lifecycleEvent = lifecycleEventRepository.findById(eventId)
+                .orElseThrow(() -> new LifecycleEventNotFoundException("Lifecycle event with ID " + eventId + " not found."));
+        return ResponseEntity.ok(lifecycleEvent);
+    }
 }

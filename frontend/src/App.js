@@ -17,9 +17,14 @@ import DeviceManagementPage from "./components/DeviceManagementPage";
 import UpdateDevice from "./components/UpdateDevice";
 import BoardAdmin from "./components/BoardAdmin";
 import SoftwareManagementPage from "./components/SoftwareManagementPage";
+import LifecycleEventManagementPage from "./components/LifecycleEventManagementPage";
+import UpdateSoftware from "./components/UpdateSoftware";
+import UpdateLifecycleEvent from "./components/UpdateLifecycleEvent";
+import UserViewDevices from "./components/UserViewDevices";
+import UserViewSoftware from "./components/UserViewSoftware";
 
 const App = () => {
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showManagementBoard, setShowManagementBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -30,7 +35,7 @@ const App = () => {
     if (user) {
       setShowUserBoard(user.roles.includes("ROLE_USER"));
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      setShowManagementBoard(user.roles.includes("ROLE_MANAGEMENT"));
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
@@ -45,7 +50,7 @@ const App = () => {
 
   const logOut = () => {
     AuthService.logout();
-    setShowModeratorBoard(false);
+    setShowManagementBoard(false);
     setShowAdminBoard(false);
     setCurrentUser(undefined);
   };
@@ -63,10 +68,10 @@ const App = () => {
             </Link>
           </li>
 
-          {showModeratorBoard && (
+          {showManagementBoard && (
             <li className="nav-item">
               <Link to={"/mod"} className="nav-link">
-                Moderator Board
+                Management Board
               </Link>
             </li>
           )}
@@ -126,11 +131,18 @@ const App = () => {
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/user" element={<BoardUser/>} />
+           <Route path="/user/view-devices" element={<UserViewDevices />} />
+           <Route path="/user/view-software" element={<UserViewSoftware />} />  
+
           <Route path="/mod" element={<BoardModerator/>} />
           <Route path="/admin" element={<BoardAdmin/>} />
           <Route path="/admin/device-management" element={<DeviceManagementPage />} />
           <Route path="/admin/software-management" element={<SoftwareManagementPage />} />
+          <Route path="/admin/lifecycle-management" element={<LifecycleEventManagementPage />} />
           <Route path="/update-device/:deviceId" element={<UpdateDevice/>} />
+          <Route path="/update-software/:softwareId" element={<UpdateSoftware/>} />
+          <Route path="/update-lifecycleEvent/:eventId" element={<UpdateLifecycleEvent/>} />
+          
         </Routes>
       </div>
 

@@ -32,17 +32,21 @@ const updateSoftware = async (software, token) => {
   }
 };
  
-const deleteSoftware = async (softwareId, token) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/admin/deletesoftware/${softwareId}`, null, {
-      params: { softwareId },
-      headers: { ...authHeader() }
-    });
-    return response.data;
-  } catch (err) {
-    throw err;
-  }
-};
+const deleteSoftware = async (softwareId) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/admin/deletesoftware`, softwareId, {
+        
+        headers: { 
+            'Content-Type': 'application/json',
+            ...authHeader(), 
+            'Access-Control-Allow-Origin': '*'
+        }
+      });
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  };
  
 const getAllSoftware = async () => {
   try {

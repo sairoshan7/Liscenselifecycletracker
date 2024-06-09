@@ -35,6 +35,16 @@ public class RegularUserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    
+    @GetMapping("/softwares")
+    public ResponseEntity<?> viewSoftwares() {
+        try {
+            List<Software> softwares = (List<Software>) regularUser.viewSoftwares().getBody();
+            return ResponseEntity.ok(softwares);
+        } catch (SoftwareNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
     @GetMapping("/notifications")
     public ResponseEntity<List<String>> receiveNotifications() {
@@ -163,6 +173,16 @@ public class RegularUserController {
     public ResponseEntity<?> searchSoftwareBySupportEndDate(@RequestParam LocalDate supportEndDate) {
         try {
             List<Software> softwareList = (List<Software>) regularUser.searchSoftwareBySupportEndDate(supportEndDate).getBody();
+            return ResponseEntity.ok(softwareList);
+        } catch (SoftwareNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+    
+    @GetMapping("/software/searchByStatus")
+    public ResponseEntity<?> searchSoftwareByStatus(@RequestParam String status) {
+        try {
+            List<Software> softwareList = (List<Software>) regularUser.searchSoftwareByStatus(status).getBody();
             return ResponseEntity.ok(softwareList);
         } catch (SoftwareNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

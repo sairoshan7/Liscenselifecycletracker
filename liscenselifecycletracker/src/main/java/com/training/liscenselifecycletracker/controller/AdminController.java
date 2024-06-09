@@ -59,7 +59,7 @@ public class AdminController {
     }
 
     @PostMapping("/devices/deletedevices")
-    public ResponseEntity<String> deleteDevice(@RequestParam Long deviceId) {
+    public ResponseEntity<String> deleteDevice(@RequestBody Long deviceId) {
         try {
             adminService.deleteDevice(deviceId);
             return ResponseEntity.ok("Device deleted successfully");
@@ -83,9 +83,8 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
-
     @PostMapping("/deletesoftware")
-    public ResponseEntity<String> deleteSoftware(@RequestParam Long softwareId) {
+    public ResponseEntity<String> deleteSoftware(@RequestBody Long softwareId) {
         try {
             adminService.deleteSoftware(softwareId);
             return ResponseEntity.ok("Software deleted successfully");
@@ -127,13 +126,13 @@ public class AdminController {
         }
     }
     
-    @PostMapping("/lifecycleevents/add")
+    @PostMapping("/addlifecycleevent")
     public ResponseEntity<String> addLifecycleEvent(@RequestBody LifecycleEvent lifecycleEvent) {
         adminService.addLifecycleEvent(lifecycleEvent);
         return ResponseEntity.status(HttpStatus.CREATED).body("Lifecycle event added successfully");
     }
 
-    @PutMapping("/lifecycleevents/update")
+    @PutMapping("/updatelifecycleevent")
     public ResponseEntity<String> updateLifecycleEvent(@RequestBody LifecycleEvent updatedLifecycleEvent) {
         try {
             adminService.updateLifecycleEvent(updatedLifecycleEvent);
@@ -143,8 +142,8 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/lifecycleevents/delete")
-    public ResponseEntity<String> deleteLifecycleEvent(@RequestParam Long eventId) {
+    @PostMapping("/deletelifecyclevent")
+    public ResponseEntity<String> deleteLifecycleEvent(@RequestBody Long eventId) {
         try {
             adminService.deleteLifecycleEvent(eventId);
             return ResponseEntity.ok("Lifecycle event deleted successfully");
@@ -207,4 +206,29 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    
+    
+    @GetMapping("/getalllifecycleevents")
+    public ResponseEntity<?> viewLifecycleEvents() {
+        try {
+            List<LifecycleEvent> lifecycleEvents = (List<LifecycleEvent>) adminService.viewAllLifecycleEvents().getBody();
+            return ResponseEntity.ok(lifecycleEvents);
+        } catch (LifecycleEventNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+    @GetMapping("/getlifecycleevent")
+    public ResponseEntity<?> searchLifecycleEventById(@RequestParam Long eventId) {
+        try {
+            LifecycleEvent lifecycleEvent = adminService.getLifecycleEventById(eventId).getBody();
+            return ResponseEntity.ok(lifecycleEvent);
+        } catch (LifecycleEventNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+    
+    
+    
 }

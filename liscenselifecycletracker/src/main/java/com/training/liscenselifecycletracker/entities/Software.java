@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,11 @@ import lombok.ToString;
 @Table(name = "software")
 public class Software {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "software_id")
-    private Long softwareId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "software_seq")
+	@SequenceGenerator(name = "software_seq", sequenceName = "software_seq", initialValue = 500)
+	@Column(name = "software_id")
+	private Long softwareId;
 
     @Column(name = "software_name")
     private String softwareName;

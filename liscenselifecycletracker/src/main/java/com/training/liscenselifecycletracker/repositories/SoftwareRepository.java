@@ -16,6 +16,8 @@ public interface SoftwareRepository extends CrudRepository<Software, Long> {
 	    List<Software> findByPurchaseDate(LocalDate purchaseDate);
 	    List<Software> findByExpiryDate(LocalDate expiryDate);
 	    List<Software> findBySupportEndDate(LocalDate supportEndDate);
+		List<Software> findByStatus(String status);
+	    
 }
 
 
