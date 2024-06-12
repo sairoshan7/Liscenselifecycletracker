@@ -45,7 +45,7 @@ function UpdateDevice() {
     e.preventDefault();
     try {
       await DeviceService.updateDevice( deviceData);
-      navigate("/admin");
+      navigate("/admin/device-management");
     } catch (error) {
       console.error('Error updating device:', error);
       alert(error.message || 'An error occurred while updating device.');

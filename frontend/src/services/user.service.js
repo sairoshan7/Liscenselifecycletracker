@@ -19,11 +19,16 @@ const getAdminBoard = () => {
   return axios.get(API_URL + "admin", { headers: authHeader() });
 };
 
+const getTechnicalsupportBoard = () => {
+  return axios.get(API_URL + "tech", { headers: authHeader() });
+};
+
 const UserService = {
   getPublicContent,
   getUserBoard,
   getModeratorBoard,
   getAdminBoard,
+  getTechnicalsupportBoard,
 };
 
 export default UserService;

@@ -12,7 +12,7 @@ import com.training.liscenselifecycletracker.entities.Software;
 public interface SoftwareRepository extends CrudRepository<Software, Long> {
 	 	List<Software> findBySoftwareId(Long softwareId);
 	    List<Software> findBySoftwareName(String softwareName);
-//	    List<Software> findByLicenseKey(Date licenseKey);
+	    List<Software> findByLicenseKey(String licenseKey);
 	    List<Software> findByPurchaseDate(LocalDate purchaseDate);
 	    List<Software> findByExpiryDate(LocalDate expiryDate);
 	    List<Software> findBySupportEndDate(LocalDate supportEndDate);

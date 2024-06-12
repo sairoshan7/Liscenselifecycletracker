@@ -45,7 +45,7 @@ function UpdateLifecycleEvent() {
     try {
       const res = await LifecycleEventService.updateLifecycleEvent(lifecycleEventData);
       console.log(res);
-      navigate("/admin/lifecycleEvent-management");
+      navigate("/admin/lifecycle-management");
     } catch (error) {
       console.error('Error updating lifecycle event:', error);
       alert(error.message || 'An error occurred while updating lifecycle event.');

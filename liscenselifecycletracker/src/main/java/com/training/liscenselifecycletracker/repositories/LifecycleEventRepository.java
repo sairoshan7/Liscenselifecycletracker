@@ -1,5 +1,6 @@
 package com.training.liscenselifecycletracker.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -13,4 +14,5 @@ public interface LifecycleEventRepository extends CrudRepository<LifecycleEvent,
 	Optional<LifecycleEvent> findByAssetIdAndEventType(Long assetId, String eventType);
 	LifecycleEvent findByAssetId(Long assetId);
     // Custom queries can be added here if needed
+	List<LifecycleEvent> findAllByAssetId(Long assetId);
 }

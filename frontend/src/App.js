@@ -3,29 +3,32 @@ import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AuthService from "./services/auth.service";
-
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import BoardUser from "./components/BoardUser";
-import BoardModerator from "./components/BoardModerator";
-
 import EventBus from "./common/EventBus";
-import DeviceManagementPage from "./components/DeviceManagementPage";
-import UpdateDevice from "./components/UpdateDevice";
+import AuthService from "./services/auth.service";
+import BoardManagement from "./components/BoardManagement";
+import BoardTechnicalsupport from "./components/BoardTechnicalsupport";
 import BoardAdmin from "./components/BoardAdmin";
+import BoardUser from "./components/BoardUser";
+import Profile from "./components/Profile";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import DeviceManagementPage from "./components/DeviceManagementPage";
 import SoftwareManagementPage from "./components/SoftwareManagementPage";
 import LifecycleEventManagementPage from "./components/LifecycleEventManagementPage";
+import UpdateDevice from "./components/UpdateDevice";
 import UpdateSoftware from "./components/UpdateSoftware";
 import UpdateLifecycleEvent from "./components/UpdateLifecycleEvent";
 import UserViewDevices from "./components/UserViewDevices";
 import UserViewSoftware from "./components/UserViewSoftware";
+import LogFaultForm from "./components/LogFault";
+import UpdateLogFault from "./components/UpdateLogFault";
+import ViewEndOfSupportDates from "./components/ViewEndOfSupportDates";
 
 const App = () => {
   const [showManagementBoard, setShowManagementBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [showTechnicalsupportBoard, setTechnicalsupportBoard] = useState(false);
   const [showUserBoard, setShowUserBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
@@ -37,6 +40,7 @@ const App = () => {
       setCurrentUser(user);
       setShowManagementBoard(user.roles.includes("ROLE_MANAGEMENT"));
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      setTechnicalsupportBoard(user.roles.includes("ROLE_TECHNICALSUPPORT"));
     }
 
     EventBus.on("logout", () => {
@@ -52,6 +56,7 @@ const App = () => {
     AuthService.logout();
     setShowManagementBoard(false);
     setShowAdminBoard(false);
+    setTechnicalsupportBoard(false);
     setCurrentUser(undefined);
   };
 
@@ -59,7 +64,7 @@ const App = () => {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
-          bezKoder
+          LLT Project
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
@@ -72,6 +77,14 @@ const App = () => {
             <li className="nav-item">
               <Link to={"/mod"} className="nav-link">
                 Management Board
+              </Link>
+            </li>
+          )}
+
+          {showTechnicalsupportBoard && (
+            <li className="nav-item">
+              <Link to={"/tech"} className="nav-link">
+                TechnicalSupport Board
               </Link>
             </li>
           )}
@@ -125,27 +138,28 @@ const App = () => {
 
       <div className="container mt-3">
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/user" element={<BoardUser/>} />
-           <Route path="/user/view-devices" element={<UserViewDevices />} />
-           <Route path="/user/view-software" element={<UserViewSoftware />} />  
-
-          <Route path="/mod" element={<BoardModerator/>} />
-          <Route path="/admin" element={<BoardAdmin/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/user" element={<BoardUser />} />
+          <Route path="/user/view-devices" element={<UserViewDevices />} />
+          <Route path="/user/view-software" element={<UserViewSoftware />} />
+          <Route path="/mod" element={<BoardManagement />} />
+          <Route path="/tech" element={<BoardTechnicalsupport />} />
+          <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/admin/device-management" element={<DeviceManagementPage />} />
           <Route path="/admin/software-management" element={<SoftwareManagementPage />} />
           <Route path="/admin/lifecycle-management" element={<LifecycleEventManagementPage />} />
-          <Route path="/update-device/:deviceId" element={<UpdateDevice/>} />
-          <Route path="/update-software/:softwareId" element={<UpdateSoftware/>} />
-          <Route path="/update-lifecycleEvent/:eventId" element={<UpdateLifecycleEvent/>} />
-          
+          <Route path="/update-device/:deviceId" element={<UpdateDevice />} />
+          <Route path="/update-software/:softwareId" element={<UpdateSoftware />} />
+          <Route path="/update-lifecycleEvent/:eventId" element={<UpdateLifecycleEvent />} />
+          <Route path="/technicalsupport/log-fault" element={<LogFaultForm />} />
+          <Route path="/technicalsupport/update-log-fault" element={<UpdateLogFault />} />
+          <Route path="/technicalsupport/view-end-of-support-dates" element={<ViewEndOfSupportDates />} />
         </Routes>
       </div>
-
     </div>
   );
 };

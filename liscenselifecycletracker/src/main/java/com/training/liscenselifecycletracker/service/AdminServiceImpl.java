@@ -114,10 +114,6 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
-    @Override
-    public void generateReports(String criteria) {
-        // Implement generateReports method
-    }
     
     @Override
     public void addLifecycleEvent(LifecycleEvent lifecycleEvent) {

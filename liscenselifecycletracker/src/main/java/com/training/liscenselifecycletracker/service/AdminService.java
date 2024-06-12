@@ -32,8 +32,6 @@ public interface AdminService {
     void updateUser(User updatedUser) throws UserNotFoundException;
 
     void deleteUser(Long userId) throws UserNotFoundException;
-
-    void generateReports(String criteria);
     
     void addLifecycleEvent(LifecycleEvent lifecycleEvent);
     

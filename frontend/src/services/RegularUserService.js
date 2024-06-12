@@ -190,6 +190,18 @@ const searchSoftwareByStatus = async (status) => {
   }
 };
 
+const searchSoftwareByLicenseKey = async (licenseKey) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/software/searchSoftwareByLicenseKey`, {
+      params: { licenseKey },
+      headers: { ...authHeader() }
+    });
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 const RegularUserService = {
   viewDevices,
   viewSoftwares,
@@ -207,7 +219,8 @@ const RegularUserService = {
   searchSoftwareByPurchaseDate,
   searchSoftwareByExpiryDate,
   searchSoftwareBySupportEndDate,
-  searchSoftwareByStatus
+  searchSoftwareByStatus,
+  searchSoftwareByLicenseKey,
 };
 
 export default RegularUserService;

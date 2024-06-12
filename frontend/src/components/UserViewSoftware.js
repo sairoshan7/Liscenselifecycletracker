@@ -44,6 +44,9 @@ const UserViewSoftware = () => {
           case 'purchaseDate':
             response = await RegularUserService.searchSoftwareByPurchaseDate(searchKeyword);
             break;
+          case 'licenseKey':
+            response = await RegularUserService.searchSoftwareByLicenseKey(searchKeyword);
+            break;
           case 'expiryDate':
             response = await RegularUserService.searchSoftwareByExpiryDate(searchKeyword);
             break;
@@ -91,6 +94,7 @@ const UserViewSoftware = () => {
           <option value="id">ID</option>
           <option value="name">Name</option>
           <option value="purchaseDate">Purchase Date</option>
+          <option value="licenseKey">license Key</option>
           <option value="expiryDate">Expiration Date</option>
           <option value="supportEndDate">Support End Date</option>
           <option value="status">Status</option>

@@ -192,4 +192,13 @@ public class RegularUserServiceImpl implements RegularUser {
         }
         return ResponseEntity.ok(softwareList);
     }
+    
+    @Override
+    public ResponseEntity<List<Software>> searchSoftwareByLicenseKey(String licenseKey) throws SoftwareNotFoundException {
+        List<Software> softwareList = softwareRepository.findByLicenseKey(licenseKey);
+        if (softwareList.isEmpty()) {
+            throw new SoftwareNotFoundException("No software found for license key '" + licenseKey + "'.");
+        }
+        return ResponseEntity.ok(softwareList);
+    }
 }

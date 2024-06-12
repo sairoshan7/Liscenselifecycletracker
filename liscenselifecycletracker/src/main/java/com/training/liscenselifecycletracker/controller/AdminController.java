@@ -93,12 +93,6 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/reports")
-    public ResponseEntity<String> generateReports(@RequestParam String criteria) {
-        // Call corresponding service method
-        // Placeholder return
-        return ResponseEntity.ok("Reports generated successfully");
-    }
 
     @PostMapping("/users/adduser")
     public ResponseEntity<String> addUser(@RequestBody User user) {

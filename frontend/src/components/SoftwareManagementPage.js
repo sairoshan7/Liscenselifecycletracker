@@ -89,6 +89,24 @@ const SoftwareManagementPage = () => {
       console.error('Error fetching software by ID:', error);
     }
   };
+
+  const generateReport = () => {
+    const header = ['ID', 'Name', 'License Key', 'Purchase Date', 'Expiration Date', 'Support End Date', 'Status'];
+    const rows = softwares.map(software => [software.softwareId, software.softwareName, software.licenseKey, software.purchaseDate, software.expirationDate, software.supportEndDate, software.status]);
+ 
+    const reportData = [header, ...rows];
+    const csvContent = reportData.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+   
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'software_report.csv');
+    document.body.appendChild(link);
+   
+    link.click();
+  };
+ 
  
   return (
     <div className="container">
@@ -173,6 +191,7 @@ const SoftwareManagementPage = () => {
           {/* You can render other software details here */}
         </div>
       )}
+      <button className="btn btn-success" onClick={generateReport}>Generate Report</button>
     </div>
   );
 };

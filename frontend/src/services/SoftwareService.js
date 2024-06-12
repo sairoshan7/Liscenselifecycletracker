@@ -70,6 +70,8 @@ const getSoftwareById = async (softwareId, token) => {
     throw err;
   }
 };
+
+
  
 const SoftwareService = {
   addSoftware,
@@ -77,6 +79,7 @@ const SoftwareService = {
   deleteSoftware,
   getAllSoftware,
   getSoftwareById,
+  
 };
  
 export default SoftwareService;

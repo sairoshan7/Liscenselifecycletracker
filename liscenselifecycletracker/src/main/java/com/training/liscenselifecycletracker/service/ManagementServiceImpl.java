@@ -1,9 +1,13 @@
 package com.training.liscenselifecycletracker.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.training.liscenselifecycletracker.entities.LifecycleEvent;
+import com.training.liscenselifecycletracker.exceptions.LifecycleEventNotFoundException;
 import com.training.liscenselifecycletracker.repositories.LifecycleEventRepository;
 
 @Service
@@ -13,30 +17,38 @@ public class ManagementServiceImpl implements ManagementService {
     LifecycleEventRepository lifecycleEventRepository;
 
     @Override
-    public void overseeLifecycle(Long assetId) {
-        // Fetch lifecycle events for the given assetId
-        LifecycleEvent events = lifecycleEventRepository.findByAssetId(assetId);
-
-        // Perform management actions on the fetched lifecycle events
-        if (events != null) {
-            // Example: Log lifecycle events or perform actions based on event type
-            System.out.println("Lifecycle event: " + events.getEventType());
+    public LifecycleEvent overseeLifecycle(Long assetId) throws LifecycleEventNotFoundException {
+        // Fetch lifecycle event for the given assetId
+        LifecycleEvent eventOptional = lifecycleEventRepository.findByAssetId(assetId);
+        if (eventOptional != null) {
+            return eventOptional;
         } else {
-            System.out.println("No lifecycle events found for asset with ID: " + assetId);
+            throw new LifecycleEventNotFoundException("Lifecycle event not found for asset with ID: " + assetId);
         }
     }
 
     @Override
-    public void generateLifecycleReports(Long assetId) {
-        // Fetch lifecycle events for the given assetId
-        LifecycleEvent events = lifecycleEventRepository.findByAssetId(assetId);
-
-        // Generate reports based on the fetched lifecycle events
-        if (events != null) {
-            // Example: Generate reports based on event details
-            System.out.println("Generating report for lifecycle event: " + events);
+    public List<LifecycleEvent> generateLifecycleReports(List<Long> assetIds) throws LifecycleEventNotFoundException {
+        // Fetch all lifecycle events for the given list of asset IDs
+        List<LifecycleEvent> events = new ArrayList<>();
+        for (Long assetId : assetIds) {
+            List<LifecycleEvent> eventsForAsset = lifecycleEventRepository.findAllByAssetId(assetId);
+            events.addAll(eventsForAsset);
+        }
+        
+        if (!events.isEmpty()) {
+            return events;
         } else {
-            System.out.println("No lifecycle events found for asset with ID: " + assetId);
+            throw new LifecycleEventNotFoundException("Lifecycle events not found for provided asset IDs: " + assetIds);
         }
     }
+
+    @Override
+    public List<LifecycleEvent> getAllLifecycleEvents() {
+        // Fetch all lifecycle events
+        return (List<LifecycleEvent>) lifecycleEventRepository.findAll();
+    }
+
+
+
 }

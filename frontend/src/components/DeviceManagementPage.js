@@ -83,6 +83,24 @@ const DeviceManagementPage = () => {
     }
   };
 
+
+  const generateReport = () => {
+    const header = ['ID', 'Name', 'Type', 'Purchase Date', 'Expiration Date', 'End of Support Date', 'Status'];
+    const rows = devices.map(device => [device.deviceId, device.deviceName, device.deviceType, device.purchaseDate, device.expirationDate, device.endOfSupportDate, device.status]);
+ 
+    const reportData = [header, ...rows];
+    const csvContent = reportData.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+   
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'device_report.csv');
+    document.body.appendChild(link);
+   
+    link.click();
+  };
+
   const deleteDevice = (deviceId) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this device?');
     if (confirmDelete) {
@@ -178,6 +196,7 @@ const DeviceManagementPage = () => {
           {/* Render other device details as needed */}
         </div>
      )}
+      <button className="btn btn-success" onClick={generateReport}>Generate Report</button>
     </div>
   );
 };

@@ -188,4 +188,14 @@ public class RegularUserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    
+    @GetMapping("/software/searchSoftwareByLicenseKey")
+    public ResponseEntity<?> searchSoftwareByLicenseKey(@RequestParam String licenseKey) {
+        try {
+            ResponseEntity<List<Software>> responseEntity = regularUser.searchSoftwareByLicenseKey(licenseKey);
+            return responseEntity;
+        } catch (SoftwareNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }

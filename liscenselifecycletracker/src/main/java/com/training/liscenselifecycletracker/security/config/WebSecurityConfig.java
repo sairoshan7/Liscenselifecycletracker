@@ -69,6 +69,7 @@ public class WebSecurityConfig {
 						.requestMatchers("/api/test/user").hasRole("USER")
 						.requestMatchers("/api/test/mod").hasRole("MANAGEMENT")
 						.requestMatchers("/api/test/admin").hasRole("ADMIN")
+						.requestMatchers("/api/test/tech").hasRole("TECHNICALSUPPORT")
 						)
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authenticationProvider(authenticationProvider())

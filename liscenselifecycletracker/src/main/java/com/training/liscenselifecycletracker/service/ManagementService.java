@@ -1,9 +1,17 @@
 package com.training.liscenselifecycletracker.service;
 
+import java.util.List;
+
+import com.training.liscenselifecycletracker.entities.LifecycleEvent;
+import com.training.liscenselifecycletracker.exceptions.LifecycleEventNotFoundException;
+
 public interface ManagementService {
 	
-	public void overseeLifecycle(Long assetId);
+	LifecycleEvent overseeLifecycle(Long assetId)throws LifecycleEventNotFoundException;
 
-	public void generateLifecycleReports(Long assetId);
+
+    List<LifecycleEvent> getAllLifecycleEvents();
+
+	List<LifecycleEvent> generateLifecycleReports(List<Long> assetIds) throws LifecycleEventNotFoundException;
 
 }

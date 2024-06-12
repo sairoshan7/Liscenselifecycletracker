@@ -88,6 +88,30 @@ const LifecycleEventManagementPage = () => {
       console.error('Error fetching event by ID:', error);
     }
   };
+
+  const generateReport = () => {
+    const header = ['Event ID', 'Asset ID', 'Event Type', 'Event Date', 'Description', 'Category'];
+    const rows = events.map(event => [event.eventId, event.relatedId, event.eventType, event.eventDate, event.description, event.category]);
+ 
+    // Joining header and rows into a single array
+    const reportData = [header, ...rows];
+ 
+    // Converting array data into CSV format
+    const csvContent = reportData.map(row => row.join(',')).join('\n');
+ 
+    // Creating a blob with the CSV content
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+   
+    // Creating a URL for the blob and creating a link to trigger the download
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'event_report.csv');
+    document.body.appendChild(link);
+   
+    // Clicking the link to trigger the download
+    link.click();
+  };
  
   return (
     <div className="container">
@@ -160,6 +184,8 @@ const LifecycleEventManagementPage = () => {
           <p>Category: {selectedEvent.category}</p>
         </div>
       )}
+
+      <button className="btn btn-success" onClick={generateReport}>Generate Report</button>
     </div>
   );
 };

@@ -22,13 +22,18 @@ public class TestApiController {
 	}
 
 	@GetMapping("/mod")
-	public String parentAccess() {
+	public String ManagementAccess() {
 		return "Management Board.";
 	}
 
 	@GetMapping("/admin")
 	public String adminAccess() {
 		return "Admin Board.";
+	}
+	
+	@GetMapping("/tech")
+	public String techAccess() {
+		return "tech Board.";
 	}
 }
 
