@@ -13,7 +13,6 @@ import com.training.liscenselifecycletracker.exceptions.SoftwareNotFoundExceptio
 public interface RegularUser {
     ResponseEntity<List<Device>> viewDevices() throws DeviceNotFoundException;
     ResponseEntity<List<String>> receiveNotifications();
-    void searchAssets(String keyword);
 
     // Search methods for Device
     ResponseEntity<Device> searchDevicesById(Long deviceId) throws DeviceNotFoundException;

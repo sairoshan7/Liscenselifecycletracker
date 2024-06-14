@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.training.liscenselifecycletracker.entities.Device;
 import com.training.liscenselifecycletracker.entities.LifecycleEvent;
 import com.training.liscenselifecycletracker.entities.Software;
+import com.training.liscenselifecycletracker.exceptions.LifecycleEventNotFoundException;
 import com.training.liscenselifecycletracker.repositories.DeviceRepository;
 import com.training.liscenselifecycletracker.repositories.LifecycleEventRepository;
 import com.training.liscenselifecycletracker.repositories.SoftwareRepository;
@@ -29,7 +30,7 @@ public class TechnicalSupportServiceImpl implements TechnicalSupportService {
     LifecycleEventRepository lifecycleEventRepository;
 
     @Override
-    public void logFault(Long deviceId, String description, String date, String category) {
+    public void logFault(Long deviceId, String description, String date, String category) throws IllegalArgumentException, LifecycleEventNotFoundException  {
         // Fetch the device from the repository
         Optional<Device> optionalDevice = deviceRepository.findById(deviceId);
 
@@ -52,12 +53,7 @@ public class TechnicalSupportServiceImpl implements TechnicalSupportService {
        	}
        	else {
        		
-       		faultEvent = new LifecycleEvent();
-            faultEvent.setAssetId(deviceId);
-            faultEvent.setEventType("Audit");
-            faultEvent.setDescription(description);
-            faultEvent.setCategory(category);
-            faultEvent.setEventDate(LocalDate.parse(date));
+       		throw new LifecycleEventNotFoundException("Lifecycleevent not found for device ID: " + deviceId);
        		
        	}
         

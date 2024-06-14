@@ -1,0 +1,59 @@
+/* Profile.css */
+
+.profile-container {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .profile-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .profile-title {
+    margin: 0;
+  }
+  
+  .profile-username {
+    font-weight: bold;
+  }
+  
+  .profile-content {
+    margin-top: 20px;
+    display: flex;
+  }
+  
+  .profile-info {
+    flex: 1;
+  }
+  
+  .profile-item {
+    margin-bottom: 10px;
+  }
+  
+  .profile-label {
+    font-weight: bold;
+  }
+  
+  .profile-value {
+    margin-left: 5px;
+  }
+  
+  .profile-roles {
+    flex: 1;
+  }
+  
+  .role-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .role-item {
+    margin-bottom: 5px;
+  }
+  
+
+  

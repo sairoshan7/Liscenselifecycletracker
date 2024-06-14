@@ -24,6 +24,7 @@ import UserViewSoftware from "./components/UserViewSoftware";
 import LogFaultForm from "./components/LogFault";
 import UpdateLogFault from "./components/UpdateLogFault";
 import ViewEndOfSupportDates from "./components/ViewEndOfSupportDates";
+import UpdateUserRole from "./components/UpdateUserRole";
 
 const App = () => {
   const [showManagementBoard, setShowManagementBoard] = useState(false);
@@ -62,78 +63,83 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark navbar-custom">
         <Link to={"/"} className="navbar-brand">
           LLT Project
         </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Home
-            </Link>
-          </li>
-
-          {showManagementBoard && (
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/mod"} className="nav-link">
-                Management Board
+              <Link to={"/home"} className="nav-link">
+                Home
               </Link>
             </li>
-          )}
 
-          {showTechnicalsupportBoard && (
-            <li className="nav-item">
-              <Link to={"/tech"} className="nav-link">
-                TechnicalSupport Board
-              </Link>
-            </li>
-          )}
+            {showManagementBoard && (
+              <li className="nav-item">
+                <Link to={"/mod"} className="nav-link">
+                  Management Board
+                </Link>
+              </li>
+            )}
 
-          {showAdminBoard && (
-            <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
-                Admin Board
-              </Link>
-            </li>
-          )}
+            {showTechnicalsupportBoard && (
+              <li className="nav-item">
+                <Link to={"/tech"} className="nav-link">
+                  TechnicalSupport Board
+                </Link>
+              </li>
+            )}
 
-          {showUserBoard && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
-              </Link>
-            </li>
-          )}
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/admin"} className="nav-link">
+                  Admin Board
+                </Link>
+              </li>
+            )}
+
+            {showUserBoard && (
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  User
+                </Link>
+              </li>
+            )}
+          </ul>
+          <div className="navbar-nav ml-auto">
+            {currentUser ? (
+              <>
+                <li className="nav-item">
+                  <Link to={"/profile"} className="nav-link">
+                    {currentUser.username}
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <a href="/login" className="nav-link" onClick={logOut}>
+                    LogOut
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link to={"/login"} className="nav-link">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/register"} className="nav-link">
+                    Sign Up
+                  </Link>
+                </li>
+              </>
+            )}
+          </div>
         </div>
-
-        {currentUser ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                LogOut
-              </a>
-            </li>
-          </div>
-        ) : (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
-                Login
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
-                Sign Up
-              </Link>
-            </li>
-          </div>
-        )}
       </nav>
 
       <div className="container mt-3">
@@ -158,6 +164,7 @@ const App = () => {
           <Route path="/technicalsupport/log-fault" element={<LogFaultForm />} />
           <Route path="/technicalsupport/update-log-fault" element={<UpdateLogFault />} />
           <Route path="/technicalsupport/view-end-of-support-dates" element={<ViewEndOfSupportDates />} />
+          <Route path="/admin/Update-Role" element={<UpdateUserRole />} />
         </Routes>
       </div>
     </div>

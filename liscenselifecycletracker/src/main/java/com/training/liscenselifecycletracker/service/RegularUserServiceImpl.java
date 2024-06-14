@@ -71,10 +71,6 @@ public class RegularUserServiceImpl implements RegularUser {
 	        return softwareRepository.findByExpiryDate(thirtyDaysFromNow);
 	    }
 
-    @Override
-    public void searchAssets(String keyword) {
-        
-    }
 
     @Override
     public ResponseEntity<Device> searchDevicesById(Long deviceId) throws DeviceNotFoundException {

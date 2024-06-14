@@ -1,11 +1,8 @@
-// import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import DeviceService from '../services/DeviceService';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useRef } from 'react';
-import { useEffect } from 'react';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/DeviceManagementPage.css'; // Import CSS file
 
 const DeviceManagementPage = () => {
   const [newDevice, setNewDevice] = useState({
@@ -20,7 +17,6 @@ const DeviceManagementPage = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [selectedDevice, setSelectedDevice] = useState(null);
-// Add state to store selected device
 
   const form = useRef();
   const navigate = useNavigate();
@@ -83,21 +79,17 @@ const DeviceManagementPage = () => {
     }
   };
 
-
   const generateReport = () => {
     const header = ['ID', 'Name', 'Type', 'Purchase Date', 'Expiration Date', 'End of Support Date', 'Status'];
     const rows = devices.map(device => [device.deviceId, device.deviceName, device.deviceType, device.purchaseDate, device.expirationDate, device.endOfSupportDate, device.status]);
- 
     const reportData = [header, ...rows];
     const csvContent = reportData.map(row => row.join(',')).join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv' });
-   
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', 'device_report.csv');
     document.body.appendChild(link);
-   
     link.click();
   };
 
@@ -115,77 +107,82 @@ const DeviceManagementPage = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Device Management Page</h2>
-      <div className="card card-container">
-        <form onSubmit={handleSubmit} ref={form}>
-          <div className="mb-3">
-            <label htmlFor="deviceName" className="form-label">Device Name:</label>
-            <input type="text" className="form-control" id="deviceName" name="deviceName" value={newDevice.deviceName} onChange={handleInputChange} required />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="deviceType" className="form-label">Device Type:</label>
-            <input type="text" className="form-control" id="deviceType" name="deviceType" value={newDevice.deviceType} onChange={handleInputChange} required />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="purchaseDate" className="form-label">Purchase Date:</label>
-            <input type="date" className="form-control" id="purchaseDate" name="purchaseDate" value={newDevice.purchaseDate} onChange={handleInputChange} required />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="expirationDate" className="form-label">Expiration Date:</label>
-            <input type="date" className="form-control" id="expirationDate" name="expirationDate" value={newDevice.expirationDate} onChange={handleInputChange} required />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="supportEndDate" className="form-label">End of Support Date:</label>
-            <input type="date" className="form-control" id="supportEndDate" name="supportEndDate" value={newDevice.supportEndDate} onChange={handleInputChange} required />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="status" className="form-label">Status:</label>
-            <select className="form-select" id="status" name="status" value={newDevice.status} onChange={handleInputChange} required>
-              <option value="">Select Status</option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={loading}>Add Device</button>
-        </form>
+    <div className="device-management-container">
+      <div className="device-form-container">
+        <h2>Device Management Page</h2>
+        <div className="card card-container">
+          <form onSubmit={handleSubmit} ref={form}>
+            <div className="form-group">
+              <label htmlFor="deviceName" className="form-label">Device Name:</label>
+              <input type="text" className="form-control" id="deviceName" name="deviceName" value={newDevice.deviceName} onChange={handleInputChange} required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="deviceType" className="form-label">Device Type:</label>
+              <input type="text" className="form-control" id="deviceType" name="deviceType" value={newDevice.deviceType} onChange={handleInputChange} required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="purchaseDate" className="form-label">Purchase Date:</label>
+              <input type="date" className="form-control" id="purchaseDate" name="purchaseDate" value={newDevice.purchaseDate} onChange={handleInputChange} required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="expirationDate" className="form-label">Expiration Date:</label>
+              <input type="date" className="form-control" id="expirationDate" name="expirationDate" value={newDevice.expirationDate} onChange={handleInputChange} required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="supportEndDate" className="form-label">End of Support Date:</label>
+              <input type="date" className="form-control" id="supportEndDate" name="supportEndDate" value={newDevice.supportEndDate} onChange={handleInputChange} required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="status" className="form-label">Status:</label>
+              <select className="form-select" id="status" name="status" value={newDevice.status} onChange={handleInputChange} required>
+                <option value="">Select Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+            <button type="submit" className="btn btn-primary" disabled={loading}>Add Device</button>
+          </form>
+        </div>
       </div>
-
-      <table className="table mt-4">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Purchase Date</th>
-            <th>Expiration Date</th>
-            <th>End of Support Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {devices.map(device => (
-            <tr key={device.deviceId}>
-              <td>{device.deviceId}</td>
-              <td>{device.deviceName}</td>
-              <td>{device.deviceType}</td>
-              <td>{device.purchaseDate}</td>
-              <td>{device.expirationDate}</td>
-              <td>{device.supportEndDate}</td>
-              <td>{device.status}</td>
-              <td>
-              <button className="btn btn-primary" onClick={() => fetchDeviceById(device.deviceId)}>View</button>
-                <button className="btn btn-danger" onClick={() => deleteDevice(device.deviceId)}>Delete</button>
-                <button><Link to={`/update-device/${device.deviceId}`}> Update</Link></button>
-              </td>
+      <div className="device-table-container">
+        <h2>Device List</h2>
+        <table className="table mt-4">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Purchase Date</th>
+              <th>Expiration Date</th>
+              <th>End of Support Date</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
+          </thead>
+          <tbody>
+            {devices.map(device => (
+              <tr key={device.deviceId}>
+                <td>{device.deviceId}</td>
+                <td>{device.deviceName}</td>
+                <td>{device.deviceType}</td>
+                <td>{device.purchaseDate}</td>
+                <td>{device.expirationDate}</td>
+                <td>{device.supportEndDate}</td>
+                <td>{device.status}</td>
+                <td>
+                  <div className="action-buttons">
+                    <button className="btn btn-primary btn-sm" onClick={() => fetchDeviceById(device.deviceId)}>View</button>
+                    <button className="btn btn-danger btn-sm" onClick={() => deleteDevice(device.deviceId)}>Delete</button>
+                    <button className="btn btn-secondary btn-sm update-button"><Link to={`/update-device/${device.deviceId}`}> Update</Link></button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {selectedDevice && (
-        <div>
+        <div className="selected-device-details">
           <h3>Selected Device Details:</h3>
           <p>Device Name: {selectedDevice.deviceName}</p>
           <p>Device Type: {selectedDevice.deviceType}</p>
@@ -193,9 +190,8 @@ const DeviceManagementPage = () => {
           <p>Expiration Date: {selectedDevice.expirationDate}</p>
           <p>End of Support Date: {selectedDevice.endOfSupportDate}</p>
           <p>Status: {selectedDevice.status}</p>
-          {/* Render other device details as needed */}
         </div>
-     )}
+      )}
       <button className="btn btn-success" onClick={generateReport}>Generate Report</button>
     </div>
   );

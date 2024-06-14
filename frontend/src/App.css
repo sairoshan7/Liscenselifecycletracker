@@ -103,3 +103,8 @@
 .text-center {
   text-align: center;
 }
+
+.navbar-custom {
+  background-color: black;
+}
+

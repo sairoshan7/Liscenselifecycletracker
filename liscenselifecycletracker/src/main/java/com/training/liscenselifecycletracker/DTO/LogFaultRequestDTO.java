@@ -1,7 +1,5 @@
 package com.training.liscenselifecycletracker.DTO;
 
-import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

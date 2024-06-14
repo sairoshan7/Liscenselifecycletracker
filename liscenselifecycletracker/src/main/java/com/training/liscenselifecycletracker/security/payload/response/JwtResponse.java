@@ -1,9 +1,5 @@
 package com.training.liscenselifecycletracker.security.payload.response;
 
-import java.util.List;
-
-import com.training.liscenselifecycletracker.entities.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

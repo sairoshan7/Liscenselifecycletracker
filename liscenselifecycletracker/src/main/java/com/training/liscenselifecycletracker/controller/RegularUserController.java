@@ -48,15 +48,11 @@ public class RegularUserController {
 
     @GetMapping("/notifications")
     public ResponseEntity<List<String>> receiveNotifications() {
-        return regularUser.receiveNotifications();
+    	 List<String> notifications = (List<String>) regularUser.receiveNotifications();
+         return ResponseEntity.ok(notifications);
     }
 
-    @GetMapping("/assets/search")
-    public ResponseEntity<?> searchAssets(@RequestParam String keyword) {
-        // Call corresponding service method
-        regularUser.searchAssets(keyword);
-        return ResponseEntity.ok().build();
-    }
+
 
     @GetMapping("/devices/searchById")
     public ResponseEntity<?> searchDevicesById(@RequestParam Long deviceId) {
@@ -198,4 +194,6 @@ public class RegularUserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    
+    
 }

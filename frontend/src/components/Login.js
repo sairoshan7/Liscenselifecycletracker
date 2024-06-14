@@ -79,7 +79,7 @@ const Login = () => {
 
         <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username" className="label">Username</label>
             <Input
               type="text"
               className="form-control"
@@ -91,7 +91,7 @@ const Login = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="label">Password</label>
             <Input
               type="password"
               className="form-control"
