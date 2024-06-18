@@ -110,6 +110,7 @@ const App = () => {
               </li>
             )}
           </ul>
+          
           <div className="navbar-nav ml-auto">
             {currentUser ? (
               <>
@@ -142,7 +143,7 @@ const App = () => {
         </div>
       </nav>
 
-      <div className="container mt-3">
+      <div className="containerApp">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -165,6 +166,7 @@ const App = () => {
           <Route path="/technicalsupport/update-log-fault" element={<UpdateLogFault />} />
           <Route path="/technicalsupport/view-end-of-support-dates" element={<ViewEndOfSupportDates />} />
           <Route path="/admin/Update-Role" element={<UpdateUserRole />} />
+          
         </Routes>
       </div>
     </div>

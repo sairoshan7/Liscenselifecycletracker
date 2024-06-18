@@ -54,7 +54,7 @@ public class WebSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	public final static String[] PUBLIC_REQUEST_MATCHERS = { "/api/test/all","/api/auth/**", "/api-docs/**", "/swagger-ui/**",
+	public final static String[] PUBLIC_REQUEST_MATCHERS = { "/api/test/all","/api/admin/getalldevices","/api/admin/getallsoftwares","/api/auth/**", "/api-docs/**", "/swagger-ui/**",
 			"/v3/api-docs/**" };
 
 	@Bean

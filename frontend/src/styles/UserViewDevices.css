@@ -1,0 +1,78 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  /* Light gray background for the entire page */
+}
+
+/* Custom heading style */
+.custom-heading {
+  margin-bottom: 1rem; /* Adjust margin as needed */
+}
+
+/* Custom search container */
+.custom-search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem; /* Adjust margin as needed */
+}
+
+/* Custom search input container */
+.custom-search-input-container {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem; /* Adjust margin as needed */
+}
+
+/* Custom input style */
+.custom-input {
+  border: 1px solid #ced4da; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Padding inside input */
+  width: 300px; /* Adjust width as needed */
+}
+
+/* Custom button style */
+.custom-button {
+  background-color: #007bff; /* Primary button color */
+  border-color: #007bff; /* Border color */
+  color: #fff; /* White text color */
+  padding: 10px 20px; /* Padding inside button */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Custom search icon style */
+.custom-search-icon {
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+}
+
+/* Custom select style */
+.custom-select {
+  width: 150px; /* Adjust width as needed */
+}
+
+/* Custom alert style */
+.custom-alert {
+  margin-top: 10px; /* Spacing above alert */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Custom table style */
+.custom-table {
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Collapse borders */
+  margin-top: 1rem; /* Adjust margin as needed */
+}
+
+/* Table dark style for headers */
+.table-dark th {
+  background-color: #343a40; /* Dark background color */
+  color: #fff; /* White text color */
+}
+
+/* Table hover effect */
+.table-hover tbody tr:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+}

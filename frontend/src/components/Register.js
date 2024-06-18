@@ -3,6 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import { Link } from 'react-router-dom';
 
 import AuthService from "../services/auth.service";
 
@@ -45,15 +46,6 @@ const vpassword = (value) => {
     );
   }
 };
-// const vmobile = (value) => {
-//   if (value.length !== 10) {
-//     return (
-//       <div className="alert alert-danger" role="alert">
-//         Enter 10 digit mobile number.
-//       </div>
-//     );
-//   }
-// };
 
 const Register = () => {
   const form = useRef();
@@ -64,10 +56,6 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
-  //const [mobile, setMobile] = useState("");
-  //const [address, setAddress] = useState("");
-  //const [gender, setGender] = useState("");
-  const [role, setRole] = useState(null);
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -83,20 +71,7 @@ const Register = () => {
     const password = e.target.value;
     setPassword(password);
   };
-/**
-  const onChangeMobile = (e) => {
-    const mobile = e.target.value;
-    setMobile(mobile);
-  };
-  const onChangeGender = (e) => {
-    const gender = e.target.value;
-    setGender(gender);
-  };
 
-  const onChangeAddress = (e) => {
-    const address = e.target.value;
-    setAddress(address);
-  }; */
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -106,7 +81,7 @@ const Register = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password,role).then(
+      AuthService.register(username, email, password).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -129,6 +104,7 @@ const Register = () => {
   return (
     <div className="col-md-12">
       <div className="card card-container">
+        <h2 className="text-center mb-4">Register</h2>
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
@@ -139,22 +115,22 @@ const Register = () => {
           {!successful && (
             <div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
                 <Input
                   type="text"
                   className="form-control"
                   name="username"
+                  placeholder="Username"
                   value={username}
                   onChange={onChangeUsername}
                   validations={[required, vusername]}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
                 <Input
                   type="password"
-                  className="form-control"
+                  className="form-control password"
                   name="password"
+                  placeholder="Password"
                   value={password}
                   onChange={onChangePassword}
                   validations={[required, vpassword]}
@@ -162,11 +138,11 @@ const Register = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
                 <Input
                   type="text"
                   className="form-control"
                   name="email"
+                  placeholder="Email"
                   value={email}
                   onChange={onChangeEmail}
                   validations={[required, validEmail]}
@@ -193,6 +169,10 @@ const Register = () => {
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
+
+        <div className="text-center mt-3">
+          <span>Already have an account? <Link to="/login">Login</Link></span>
+        </div>
       </div>
     </div>
   );

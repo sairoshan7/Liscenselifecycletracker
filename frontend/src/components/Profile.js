@@ -1,12 +1,21 @@
 import React from "react";
 import AuthService from "../services/auth.service";
- 
+
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
- 
+
+  const cardStyle = {
+    backgroundColor: "#273849", // Navy blue color
+    color: "white",
+  };
+
+  const authoritiesStyle = {
+    color: "black", // Set authorities text color to black
+  };
+
   return (
     <div className="container mt-5">
-      <div className="card">
+      <div className="card" style={cardStyle}>
         <div className="card-header">
           <h3 className="mb-0">
             <strong>{currentUser.username}</strong> Profile
@@ -14,15 +23,15 @@ const Profile = () => {
         </div>
         <div className="card-body">
           <p className="card-text">
-            <strong>Id:</strong> {currentUser.id}
+            <strong>ID:</strong> {currentUser.id}
           </p>
           <p className="card-text">
             <strong>Email:</strong> {currentUser.email}
           </p>
-          <strong>Authorities:</strong>
-          <ul className="list-group mt-3">
-            {Array.isArray(currentUser.role) ? (
-              currentUser.role.map((role, index) => (
+          <strong className="card-text">Authorities:</strong>
+          <ul className="list-group mt-3" style={authoritiesStyle}>
+            {Array.isArray(currentUser.roles) ? (
+              currentUser.roles.map((role, index) => (
                 <li className="list-group-item" key={index}>
                   {role}
                 </li>
@@ -36,5 +45,5 @@ const Profile = () => {
     </div>
   );
 };
- 
+
 export default Profile;

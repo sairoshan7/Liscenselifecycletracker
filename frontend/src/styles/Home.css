@@ -1,0 +1,121 @@
+/* Global styles */
+.containerHome {
+  padding-top: 0px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
+}
+
+/* Header Section */
+.header-section {
+  margin-bottom: 30px;
+}
+
+.header-section .card {
+  border: none;
+  background-color: #f8f9fa;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.header-section .card-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.header-section .card-text {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+/* Main Content Section */
+.main-content-section {
+  margin-bottom: 30px;
+}
+
+.main-content-section .card {
+  border: none;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.main-content-section .card-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.main-content-section .progress {
+  height: 20px;
+  margin-bottom: 15px;
+}
+
+.main-content-section .progress-bar {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* About Us Section */
+.about-us-section {
+  margin-bottom: 30px;
+  padding: 50px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about-us-section .card {
+  border: none;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.about-us-section .text-primary {
+  font-size: 2rem;
+  font-weight: normal;
+  color: #007bff;
+}
+
+.about-us-section .lead {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.about-us-section .img-office {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.about-us-section .img-fluid {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Footer Section */
+.footer-section {
+  background-color: #35485d;
+  padding: 10px 0;
+}
+
+.footer-section p {
+  margin: 0;
+  font-size: 13px;
+  color: white;
+}
+
+
+
+/* Animation */
+.animate-scroll {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.fade-in-active {
+  opacity: 1;
+}
+
+
+

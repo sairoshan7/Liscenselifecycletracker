@@ -1,3 +1,5 @@
+// BoardAdmin.js
+
 import React, { useState } from "react";
 import "../styles/BoardAdmin.css"; // Import external CSS
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
@@ -15,8 +17,7 @@ const BoardAdmin = () => {
       window.location.href = "/admin/software-management";
     } else if (selectedPage === "lifecycle") {
       window.location.href = "/admin/lifecycle-management";
-    }
-    else if (selectedPage === "UpdateRole") {
+    } else if (selectedPage === "UpdateRole") {
       window.location.href = "/admin/Update-Role";
     }
   };

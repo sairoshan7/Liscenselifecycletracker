@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DeviceService from '../services/DeviceService';
+import "../styles/UpdateDevice.css"
 
 function UpdateDevice() {
   const navigate = useNavigate();
@@ -81,7 +82,7 @@ function UpdateDevice() {
           <label>Status:</label>
           <input type="text" name="status" value={deviceData.status || ''} onChange={handleInputChange} />
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" className="update-button" >Update</button>
       </form>
     </div>
   );

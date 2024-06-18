@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/BoardAdmin.css"; // Import external CSS
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 const BoardTechnicalsupport = () => {
@@ -18,24 +19,28 @@ const BoardTechnicalsupport = () => {
   };
 
   return (
-    <div className="container mt-5"> {/* Apply Bootstrap's container class */}
-      <header className="jumbotron">
-        <h2>Technical Support Dashboard</h2>
-        <div className="form-group mt-3"> {/* Apply Bootstrap's form-group class */}
-          <label htmlFor="dashboard">Select Dashboard:</label>
-          <select
-            id="dashboard"
-            value={selectedOption}
-            onChange={handleDropdownChange}
-            className="form-control mt-2" // Apply Bootstrap's form-control and mt-2 classes
-          >
-            <option value="">Select an option</option>
-            <option value="logfault">Log Fault</option>
-            <option value="updatelogfault">Update Log Fault</option>
-            <option value="viewendofsupportdates">View End of Support Dates</option>
-          </select>
-        </div>
-      </header>
+    <div className="admin-dashboard-container"> {/* Apply the same class name */}
+      <div className="admin-dashboard-content"> {/* Apply the same class name */}
+        <header className="admin-dashboard-header"> {/* Apply the same class name */}
+          <h2>Technical Support Dashboard</h2>
+          <div className="admin-dropdown-form"> {/* Apply the same class name */}
+            <div className="form-group">
+              <label htmlFor="dashboard">Select Dashboard:</label>
+              <select
+                id="dashboard"
+                value={selectedOption}
+                onChange={handleDropdownChange}
+                className="form-control" // Apply the same class name
+              >
+                <option value="">Select an option</option>
+                <option value="logfault">Log Fault</option>
+                <option value="updatelogfault">Update Log Fault</option>
+                <option value="viewendofsupportdates">View End of Support Dates</option>
+              </select>
+            </div>
+          </div>
+        </header>
+      </div>
     </div>
   );
 };

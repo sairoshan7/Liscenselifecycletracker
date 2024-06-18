@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
 import AuthService from "../services/auth.service";
+import "../App.css"; // Import your custom CSS
 
 const required = (value) => {
   if (!value) {
@@ -69,21 +69,22 @@ const Login = () => {
   };
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
+    <div className="container">
+      <div className="card-container card">
+        <h2 className="text-center mb-4">Login</h2>
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
           className="profile-img-card"
         />
 
-        <Form onSubmit={handleLogin} ref={form}>
+        <Form className="form" onSubmit={handleLogin} ref={form}>
           <div className="form-group">
-            <label htmlFor="username" className="label">Username</label>
             <Input
               type="text"
               className="form-control"
               name="username"
+              placeholder="Username"
               value={username}
               onChange={onChangeUsername}
               validations={[required]}
@@ -91,11 +92,11 @@ const Login = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password" className="label">Password</label>
             <Input
               type="password"
-              className="form-control"
+              className="form-control password"
               name="password"
+              placeholder="Password"
               value={password}
               onChange={onChangePassword}
               validations={[required]}
@@ -120,6 +121,10 @@ const Login = () => {
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
+
+        <div className="text-center mt-3">
+          <span>Don't have an account? <Link to="/register" className="link">Sign up</Link></span>
+        </div>
       </div>
     </div>
   );

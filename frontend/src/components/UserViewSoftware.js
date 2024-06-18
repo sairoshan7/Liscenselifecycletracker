@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import RegularUserService from '../services/RegularUserService';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import '../styles/UserViewSoftware.css'; // Import custom CSS for styling
+import searchIcon from '../assets/search.png'; // Import your search icon from Icons8
 
 const UserViewSoftware = () => {
   const [software, setSoftware] = useState([]);
@@ -22,7 +24,7 @@ const UserViewSoftware = () => {
       .catch(error => {
         console.error('Error fetching software:', error);
         setErrorState(true);
-        setErrorMessage(error.response.data); // Use error response message from backend
+        setErrorMessage(getErrorMessage(error)); // Use error response message from backend
       });
   };
 
@@ -66,10 +68,8 @@ const UserViewSoftware = () => {
     } catch (error) {
       console.error('Error searching software:', error);
       // Extract error message from the response if available
-      const errorMessage = error.response ? error.response.data : 'An error occurred while searching software. Please try again later.';
-      // Handle error in frontend
+      setErrorMessage(getErrorMessage(error));
       setErrorState(true);
-      setErrorMessage(errorMessage);
     }
   };
 
@@ -79,14 +79,45 @@ const UserViewSoftware = () => {
 
   const handleSelectChange = (e) => {
     setSearchField(e.target.value);
+    setSearchKeyword(''); // Clear search keyword when changing the field
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const getErrorMessage = (error) => {
+    return error.response ? error.response.data : 'An error occurred while searching software. Please try again later.';
   };
 
   return (
-    <div className="container">
-      <h2 className="mt-5">View Software</h2>
-      <div className="input-group mb-3">
+    <div className="container mt-5">
+      <h2 className="mb-4">View Software</h2>
+      <div className="search-container">
+        <div className="search-input-container">
+          <input
+            type="text"
+            className="form-control custom-input"
+            placeholder="Search..."
+            aria-label="Search"
+            aria-describedby="search-button"
+            value={searchKeyword}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress} // Handle Enter key press
+          />
+          <button
+            className="btn btn-primary custom-button"
+            type="button"
+            id="search-button"
+            onClick={handleSearch}
+          >
+            <img src={searchIcon} alt="Search Icon" className="search-icon" />
+          </button>
+        </div>
         <select
-          className="form-select"
+          className="form-select custom-select"
           aria-label="Search field"
           value={searchField}
           onChange={handleSelectChange}
@@ -94,60 +125,45 @@ const UserViewSoftware = () => {
           <option value="id">ID</option>
           <option value="name">Name</option>
           <option value="purchaseDate">Purchase Date</option>
-          <option value="licenseKey">license Key</option>
+          <option value="licenseKey">License Key</option>
           <option value="expiryDate">Expiration Date</option>
-          <option value="supportEndDate">Support End Date</option>
+          <option value="supportEndDate">End of Support Date</option>
           <option value="status">Status</option>
         </select>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search..."
-          aria-label="Search"
-          aria-describedby="search-button"
-          value={searchKeyword}
-          onChange={handleInputChange}
-        />
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          id="search-button"
-          onClick={handleSearch}
-        >
-          Search
-        </button>
       </div>
       {errorState && (
         <div className="alert alert-danger" role="alert">
           {errorMessage}
         </div>
       )}
-      <table className="table mt-4">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>License Key</th>
-            <th>Purchase Date</th>
-            <th>Expiration Date</th>
-            <th>Support End Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {software.map(softwareItem => (
-            <tr key={softwareItem.softwareId}>
-              <td>{softwareItem.softwareId}</td>
-              <td>{softwareItem.softwareName}</td>
-              <td>{softwareItem.licenseKey}</td>
-              <td>{softwareItem.purchaseDate}</td>
-              <td>{softwareItem.expiryDate}</td>
-              <td>{softwareItem.supportEndDate}</td>
-              <td>{softwareItem.status}</td>
+      <div className="table-responsive">
+        <table className="table table-bordered table-hover mt-4 custom-table">
+          <thead className="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>License Key</th>
+              <th>Purchase Date</th>
+              <th>Expiration Date</th>
+              <th>End of Support Date</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {software.map(softwareItem => (
+              <tr key={softwareItem.softwareId}>
+                <td>{softwareItem.softwareId}</td>
+                <td>{softwareItem.softwareName}</td>
+                <td>{softwareItem.licenseKey}</td>
+                <td>{softwareItem.purchaseDate}</td>
+                <td>{softwareItem.expiryDate}</td>
+                <td>{softwareItem.supportEndDate}</td>
+                <td>{softwareItem.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

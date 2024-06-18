@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RegularUserService from '../services/RegularUserService';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import '../styles/UserViewDevices.css'; // Import custom CSS for styling
+import searchIcon from '../assets/search.png'; // Import your search icon from Icons8
 
 const UserViewDevices = () => {
   const [devices, setDevices] = useState([]);
@@ -78,15 +79,42 @@ const UserViewDevices = () => {
   };
 
   const handleSelectChange = (e) => {
-    setSearchField(e.target.value);
+    setSearchField(e.target.value); // Update selected search field
+    setSearchKeyword(''); // Clear search keyword when changing the field
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
     <div className="container mt-5">
-      <h2 className="mb-4">View Devices</h2>
-      <div className="input-group mb-3">
+      <h2 className="mb-4 custom-heading">View Devices</h2>
+      <div className="custom-search-container">
+        <div className="custom-search-input-container">
+          <input
+            type="text"
+            className="form-control custom-input"
+            placeholder="Search..."
+            aria-label="Search"
+            aria-describedby="search-button"
+            value={searchKeyword}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress} // Handle Enter key press
+          />
+          <button
+            className="btn btn-primary custom-button"
+            type="button"
+            id="search-button"
+            onClick={handleSearch}
+          >
+            <img src={searchIcon} alt="Search Icon" className="custom-search-icon" />
+          </button>
+        </div>
         <select
-          className="form-select"
+          className="form-select custom-select"
           aria-label="Search field"
           value={searchField}
           onChange={handleSelectChange}
@@ -99,55 +127,40 @@ const UserViewDevices = () => {
           <option value="supportEndDate">End of Support Date</option>
           <option value="status">Status</option>
         </select>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search..."
-          aria-label="Search"
-          aria-describedby="search-button"
-          value={searchKeyword}
-          onChange={handleInputChange}
-        />
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          id="search-button"
-          onClick={handleSearch}
-        >
-          Search
-        </button>
       </div>
       {errorState && (
-        <div className="alert alert-danger" role="alert">
+        <div className="alert alert-danger custom-alert" role="alert">
           {errorMessage}
         </div>
       )}
-      <table className="table mt-4">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Purchase Date</th>
-            <th>Expiration Date</th>
-            <th>End of Support Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {devices.map(device => (
-            <tr key={device.deviceId}>
-              <td>{device.deviceId}</td>
-              <td>{device.deviceName}</td>
-              <td>{device.deviceType}</td>
-              <td>{device.purchaseDate}</td>
-              <td>{device.expirationDate}</td>
-              <td>{device.supportEndDate}</td>
-              <td>{device.status}</td>
+      <div className="table-responsive">
+        <table className="table table-bordered table-hover mt-4 custom-table">
+          <thead className="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Purchase Date</th>
+              <th>Expiration Date</th>
+              <th>End of Support Date</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {devices.map(device => (
+              <tr key={device.deviceId}>
+                <td>{device.deviceId}</td>
+                <td>{device.deviceName}</td>
+                <td>{device.deviceType}</td>
+                <td>{device.purchaseDate}</td>
+                <td>{device.expirationDate}</td>
+                <td>{device.supportEndDate}</td>
+                <td>{device.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

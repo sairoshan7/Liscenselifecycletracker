@@ -1,0 +1,35 @@
+.header-section {
+    background-color: #f8f9fa; /* Example background color */
+    padding: 60px 0; /* Example padding */
+  }
+  
+  .container {
+    width: 100%; /* Ensure container takes full width */
+    max-width: 1200px; /* Limit container width */
+    margin: 0 auto; /* Center container horizontally */
+    padding: 0 15px; /* Add padding inside container */
+  }
+  
+  .content {
+    padding-right: 20px; /* Example padding for content */
+  }
+  
+  .header-title {
+    font-size: 2.5rem; /* Example font size for title */
+    margin-bottom: 20px; /* Bottom margin for spacing */
+    color: #333; /* Example text color */
+  }
+  
+  .header-text {
+    font-size: 1.1rem; /* Example font size for text */
+    line-height: 1.6; /* Line height for readability */
+    color: #555; /* Example text color */
+  }
+  
+  .img-fluid {
+    max-width: 100%; /* Ensure image doesn't exceed container width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove default inline-block spacing */
+    margin-left: auto; /* Align image to the right */
+  }
+  

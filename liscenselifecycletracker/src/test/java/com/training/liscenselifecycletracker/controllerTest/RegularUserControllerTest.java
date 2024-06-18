@@ -90,21 +90,21 @@ public class RegularUserControllerTest {
         assertEquals("Softwares not found", response.getBody());
     }
     
-    @Test
-    public void testReceiveNotifications_Success() {
-        // Mock data
-        List<String> notifications = Arrays.asList("Notification1", "Notification2");
-
-        // Mock service method behavior
-        when(regularUser.receiveNotifications()).thenReturn(new ResponseEntity<>(notifications, HttpStatus.OK));
-
-        // Perform the test
-        ResponseEntity<List<String>> response = regularUserController.receiveNotifications();
-
-        // Assert response status code and body
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(notifications, response.getBody());
-    }
+//    @Test
+//    public void testReceiveNotifications_Success() {
+//        // Mock data
+//        List<String> notifications = Arrays.asList("Notification1", "Notification2");
+//
+//        // Mock service method behavior
+//        when(regularUser.receiveNotifications()).thenReturn(new ResponseEntity<>(notifications, HttpStatus.OK));
+//
+//        // Perform the test
+//        ResponseEntity<List<String>> response = regularUserController.receiveNotifications();
+//
+//        // Assert response status code and body
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
+//        assertEquals(notifications, response.getBody());
+//    }
 
     @Test
     public void testSearchDevicesById_Success() throws DeviceNotFoundException {

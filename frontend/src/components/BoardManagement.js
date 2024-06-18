@@ -89,38 +89,40 @@ const BoardManagement = ({ setGeneratedReportProp }) => {
       >
         Generate Report for Selected Assets
       </button>
-      <table className="table mt-4">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Event ID</th>
-            <th>Asset ID</th>
-            <th>Event Type</th>
-            <th>Event Date</th>
-            <th>Description</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {lifecycleEvents.map(event => (
-            <tr key={event.eventId}>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={selectedAssets.includes(event.assetId)}
-                  onChange={() => handleCheckboxChange(event.assetId)}
-                />
-              </td>
-              <td>{event.eventId}</td>
-              <td>{event.assetId}</td>
-              <td>{event.eventType}</td>
-              <td>{event.eventDate}</td>
-              <td>{event.description}</td>
-              <td>{event.category}</td>
+      <div className="table-responsive">
+        <table className="table mt-4">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Event ID</th>
+              <th>Asset ID</th>
+              <th>Event Type</th>
+              <th>Event Date</th>
+              <th>Description</th>
+              <th>Category</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {lifecycleEvents.map(event => (
+              <tr key={event.eventId}>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedAssets.includes(event.assetId)}
+                    onChange={() => handleCheckboxChange(event.assetId)}
+                  />
+                </td>
+                <td>{event.eventId}</td>
+                <td>{event.assetId}</td>
+                <td>{event.eventType}</td>
+                <td>{event.eventDate}</td>
+                <td>{event.description}</td>
+                <td>{event.category}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {/* Display the generated report */}
       {generatedReport && (

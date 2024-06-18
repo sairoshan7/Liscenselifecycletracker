@@ -1,55 +1,21 @@
-/* label {
-  display: block;
-  margin-top: 10px;
-}
-
-.card-container.card {
-  max-width: 350px !important;
-  padding: 40px 40px;
-}
-
-.card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  margin: 0 auto 25px;
-  margin-top: 50px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-.profile-img-card {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-}
-
- */
-
- /* External CSS for Login Component */
+/* External CSS for Login Component */
 
 .card-container {
-  max-width: 400px;
-  margin: 0 auto;
+  max-width: 350px; /* Reduced max-width */
+  margin: 50px auto; /* Adjust margin to create space */
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
   background-color: #fff;
 }
 
 .profile-img-card {
-  width: 150px;
-  height: 150px;
+  width: 80px; /* Reduced profile picture size */
+  height: 80px; /* Reduced profile picture size */
   margin: 0 auto 20px;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow to profile picture */
 }
 
 .form-group {
@@ -105,6 +71,7 @@
 }
 
 .navbar-custom {
-  background-color: black;
+  background-color: #273849; /* Match the color with login/register */
 }
+
 

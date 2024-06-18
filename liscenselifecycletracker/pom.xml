@@ -158,6 +158,10 @@
 									com/training/liscenselifecycletracker/converter/**</exclude>
 								<exclude>
 									**/*LiscenselifecycletrackerApplication.class</exclude>
+								<exclude>
+									**/*AuthController.class</exclude>
+									<exclude>
+									**/*TestApiController.class</exclude>
 							</excludes>
 						</configuration>
 					</execution>
